@@ -43,7 +43,9 @@ export class ExpoMixpanelAnalytics {
       this.appId = Constants.manifest.slug;
       this.appVersion = Constants.manifest.version;
       this.screenSize = `${width}x${height}`;
-      this.deviceName = Device.deviceName;
+      if (Device.deviceName !== null) {
+        this.deviceName = Device.deviceName;
+      }
       if (isIosPlatform && Device.modelId && Device.modelName) {
         this.platform = Device.modelId;
         this.model = Device.modelName;
