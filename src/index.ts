@@ -1,6 +1,7 @@
 import { Platform, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
+import * as Device from "expo-device";
 import { Buffer } from "buffer";
 
 const { width, height } = Dimensions.get("window");
@@ -42,10 +43,10 @@ export class ExpoMixpanelAnalytics {
       this.appId = Constants.manifest.slug;
       this.appVersion = Constants.manifest.version;
       this.screenSize = `${width}x${height}`;
-      this.deviceName = Constants.deviceName;
-      if (isIosPlatform && Constants.platform && Constants.platform.ios) {
-        this.platform = Constants.platform.ios.platform;
-        this.model = Constants.platform.ios.model;
+      this.deviceName = Device.deviceName;
+      if (isIosPlatform && Device.modelId && Device.modelName) {
+        this.platform = Device.modelId;
+        this.model = Device.modelName;
       } else {
         this.platform = "android";
       }
